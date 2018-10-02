@@ -9,12 +9,12 @@ namespace Engine.ShapeColection
             throw new System.NotImplementedException();
         }
 
-        public void MoveShapeUp(IShape shape)
+        public void MoveShapeUp(IShape shape, int positionChange)
         {
             throw new System.NotImplementedException();
         }
 
-        public void MoveShapeDown(IShape shape)
+        public void MoveShapeDown(IShape shape,int positionChange)
         {
             throw new System.NotImplementedException();
         }

@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ShapeColection\IShapeColection.cs" />
+    <Compile Include="ShapeColection\ShapeColection_Getters.cs" />
     <Compile Include="ShapeColection\ShapeColection_Moves.cs" />
     <Compile Include="Shapes\IShape.cs" />
     <Compile Include="Shapes\Polygon.cs" />

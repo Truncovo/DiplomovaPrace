@@ -6,73 +6,64 @@ namespace Engine.Shapes
 {
     public class Square: IShape
     {
-        private readonly List<PointMy> _points = new List<PointMy>();
+        //CTORS
+        //PROPERTYS
+        //PUBLIC METHODS
+        //EVENT STUFF
+        //PRIVATE PART
 
-        private PointMy _point;
+        //CTORS
+        public Square()
+        {
+            _point = new PointMy(0,0);
+            _size = new SizeMy(0,0);
+        }
+        public Square(PointMy point, SizeMy size, Skladba skladba = null)
+        {
+            _size = size;
+            _point = point;
+        }
+
         public PointMy Point
         {
             get => _point;
             set
             {
                 _point = value;
-                ResetSqarePoints();
                 OnShapeEdited();
-
             }
         }
-
-        private SizeMy _size;
         public SizeMy Size
         {
             get => _size;
             set
             {
                 _size = value;
-                ResetSqarePoints();
                 OnShapeEdited();
-
             }
         }
 
-        //Empty ctor
-        public Square()
-        {
-            _point = new PointMy(0,0);
-            _size = new SizeMy(0,0);
-        }
+        //PROPERTYS
+        public Skladba Skladba { get; set; }
+        public ShapeStates State { get; set; } = ShapeStates.Basic;
 
-        public Square(PointMy point, SizeMy size, Skladba skladba = null)
-        {
-            _size = size;
-            _point = point;
-
-            ResetSqarePoints();
-
-        }
-
-        
-
-        public event ShapeEventHandler ShapeEdited;
-
+        //PUBLIC METHODS
         public IReadOnlyCollection<PointMy> GetPoints()
         {
-            return _points.AsReadOnly();
+            var res = new List<PointMy>();
+            res.Clear();
+            res.Add(new PointMy(_point.X, _point.Y));
+            res.Add(new PointMy(_point.X, _point.Y + _size.Y));
+            res.Add(new PointMy(_point.X + _size.X, _point.Y + _size.Y));
+            res.Add(new PointMy(_point.X + _size.X, _point.Y));
+            return res;
         }
-
-        public ShapeStates State { get; set; }
-
-        public Skladba Skladba { get; set; }
 
         public void Clear()
         {
             _point = new PointMy(0, 0);
             _size = new SizeMy(0, 0);
-            ResetSqarePoints();
             OnShapeEdited();
-        }
-        protected virtual void OnShapeEdited()
-        {
-            ShapeEdited?.Invoke();
         }
 
         public override string ToString()
@@ -90,14 +81,16 @@ namespace Engine.Shapes
             return stringBuilder.ToString();
         }
 
-        private void ResetSqarePoints()
+        //EVENT STUFF
+        public event ShapeEventHandler ShapeEdited;
+        protected virtual void OnShapeEdited()
         {
-            _points.Clear();
-            _points.Add(new PointMy(_point.X, _point.Y));
-            _points.Add(new PointMy(_point.X, _point.Y + _size.Y));
-            _points.Add(new PointMy(_point.X + _size.X, _point.Y + _size.Y));
-            _points.Add(new PointMy(_point.X + _size.X, _point.Y));
+            ShapeEdited?.Invoke();
         }
+
+        //PRIVATE PART
+        private SizeMy _size;
+        private PointMy _point;
 
     }
 

@@ -5,9 +5,10 @@ namespace Engine.ShapeColection
 {
     public partial class ShapeColection : IShapeColection
     {
-        private readonly List<IShape> _storage = new List<IShape>();
+        //CTORS
 
-        private IShape _selectedShape;
+        //PROPERTYS
+        //todo Get rid of this
         public IShape SelectedShape
         {
             get => _selectedShape;
@@ -17,7 +18,7 @@ namespace Engine.ShapeColection
                 //if (!_storage.Contains(value))
                 //    throw new Iso13370Exception("Selecting shape which is not in list");
 
-                if (_selectedShape !=null)
+                if (_selectedShape != null)
                     _selectedShape.ShapeEdited -= OnShapeColectionChanged;
                 _selectedShape = value;
                 value.ShapeEdited += OnShapeColectionChanged;
@@ -25,14 +26,11 @@ namespace Engine.ShapeColection
             }
         }
 
+        //PUBLIC METHODS
+        //todo Get rid of this
         public void SelectShape(IShape shape)
         {
             SelectedShape = shape;
-        }
-
-        public IEnumerable<IShape> GetColection()
-        {
-            return _storage.AsReadOnly();
         }
 
         public void Add(IShape shape)
@@ -60,12 +58,17 @@ namespace Engine.ShapeColection
             OnShapeColectionChanged();
         }
 
-
+        //EVENT STUFF
         public event ShapeColectionEventHandler ShapeColectionChanged;
-
         protected virtual void OnShapeColectionChanged()
         {
             ShapeColectionChanged?.Invoke(this);
         }
+
+        //PRIVATE PART
+        private readonly List<IShape> _storage = new List<IShape>();
+        //todo Get rid of this
+        private IShape _selectedShape;
+
     }
-}
+}   

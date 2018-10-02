@@ -5,13 +5,13 @@ namespace Engine.Shapes
 {
     public interface IShape
     {
+        ShapeStates State { get; set; }
+        Skladba Skladba { get; set; }
 
-        event ShapeEventHandler ShapeEdited;
         IReadOnlyCollection<PointMy> GetPoints();
 
-        ShapeStates State { get; set; }
-
-        Skladba Skladba { get; set; }
         void Clear();
+
+        event ShapeEventHandler ShapeEdited;
     }
 }
