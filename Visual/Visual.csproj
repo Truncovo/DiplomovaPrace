@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{591FA6D9-6343-4B1F-B7E6-A8F2811C39DB}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Visual</RootNamespace>
+    <AssemblyName>Visual</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Grids and StackPanels\ShapeInput\EditShapePanel.cs" />
+    <Compile Include="Grids and StackPanels\ShapeInput\EditSquarePanel.cs" />
+    <Compile Include="Platno\MainCanvas.cs" />
+    <Compile Include="Grids and StackPanels\ShapeInput\GetSquareGridOld.cs" />
+    <Compile Include="Grids and StackPanels\ShapeInput\NewShapePanel.cs" />
+    <Compile Include="Platno\MainCanvasBoxing.cs" />
+    <Compile Include="Presets\GetXyLine.cs" />
+    <Compile Include="Presets\DoubleBox.cs" />
+    <Compile Include="Grids and StackPanels\ShapeInput\IShapeInput.cs" />
+    <Compile Include="Grids and StackPanels\ShapeInput\NewSquarePanel.cs" />
+    <Compile Include="Presets\GetXyLineWithDelete.cs" />
+    <Compile Include="Presets\OkResetGrid.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Presets\PresetTextBlock.cs" />
+    <Compile Include="Grids and StackPanels\ShapeListPanel.cs" />
+    <Compile Include="Grids and StackPanels\ShapeVisualLine.cs" />
+    <Compile Include="Presets\PresetButton.cs" />
+    <Compile Include="MainApp.cs" />
+    <Compile Include="Texts.cs" />
+    <Compile Include="tmpClasses\ToolStackPanel.cs" />
+    <Compile Include="Grids and StackPanels\ToolBarPanel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Engine\Engine.csproj">
+      <Project>{b15ddfc4-c3ba-42cc-acc9-7a4720276f1c}</Project>
+      <Name>Engine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
