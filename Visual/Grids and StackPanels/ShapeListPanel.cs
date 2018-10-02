@@ -11,7 +11,7 @@ namespace Visual
         public ShapeListPanel(ShapeColection shapeColection)
         {
             _shapeColection = shapeColection;
-            shapeColection.ShapeColectionChanged += OnShapeColectionChanged;
+            shapeColection.Changed += OnShapeColectionChanged;
         }
 
 

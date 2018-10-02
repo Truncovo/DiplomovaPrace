@@ -64,7 +64,7 @@ namespace Visual
         public MainCanvas(ShapeColection shapeColection)
         {
             _shapeColection = shapeColection;
-            shapeColection.ShapeColectionChanged += OnShapeColectionChanged;
+            shapeColection.Changed += OnShapeColectionChanged;
 
             this.Background = Brushes.Aqua;
             this.HorizontalAlignment = HorizontalAlignment.Left;

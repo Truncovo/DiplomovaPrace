@@ -27,6 +27,6 @@ namespace Engine
 
 
 
-        event ShapeColectionEventHandler ShapeColectionChanged;
+        event ShapeColectionEventHandler Changed;
     }
 }

@@ -42,7 +42,7 @@ namespace Engine.ShapeColection
 
         public void Remove(IShape shape)
         {
-            shape.ShapeEdited -= OnShapeColectionChanged;
+           shape.ShapeEdited -= OnShapeColectionChanged;
             _storage.Remove(shape);
             if (shape == SelectedShape)
                 _selectedShape = null;
@@ -59,10 +59,10 @@ namespace Engine.ShapeColection
         }
 
         //EVENT STUFF
-        public event ShapeColectionEventHandler ShapeColectionChanged;
+        public event ShapeColectionEventHandler Changed;
         protected virtual void OnShapeColectionChanged()
         {
-            ShapeColectionChanged?.Invoke(this);
+            Changed?.Invoke(this);
         }
 
         //PRIVATE PART
