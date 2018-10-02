@@ -5,6 +5,7 @@ using Engine.ShapeColection;
 
 namespace Visual
 {
+
     class MainApp
     {
         [STAThread]
