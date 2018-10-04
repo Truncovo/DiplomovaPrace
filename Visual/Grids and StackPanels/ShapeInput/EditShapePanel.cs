@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using Engine;
-using Engine.ShapeColection;
 using Engine.Shapes;
 using Engine.XyObjects;
+using ShapeColection = Engine.ShapeColections.ShapeColection;
 
 namespace Visual
 {
@@ -17,7 +17,7 @@ namespace Visual
             Children.Add(new PresetTextBlock("edit your polyline"));
 
             //adding 3 get point lines
-            foreach (PointMy point in _shape.GetPoints())
+            foreach (PointMy point in _shape.Points)
             {
                 GetXyLineWithDelete getPointsLine = new GetXyLineWithDelete(Texts.ShapeWindow_point,point.X,point.Y);
                 getPointsLine.DeleteButtonClicked += OnDeleteButtonClick;

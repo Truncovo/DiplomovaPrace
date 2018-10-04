@@ -28,7 +28,7 @@ namespace Visual
         protected override void OnPreviewTextInput(TextCompositionEventArgs e)
         {
             base.OnPreviewTextInput(e);
-            e.Handled = Regex.IsMatch(e.Text, "[^0-9,.]+");
+            e.Handled = Regex.IsMatch(e.Text, "[^0-9,.,-]+");
             
 
         }

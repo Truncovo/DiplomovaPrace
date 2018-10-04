@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using Engine.ShapeColection;
+using ShapeColection = Engine.ShapeColections.ShapeColection;
 
 namespace Visual
 {

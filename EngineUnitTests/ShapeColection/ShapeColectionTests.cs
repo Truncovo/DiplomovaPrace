@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Engine;
-using Engine.ShapeColection;
 using Engine.Shapes;
 using Engine.XyObjects;
 using NUnit.Framework;
+using ShapeColection = Engine.ShapeColections.ShapeColection;
 
 namespace EngineUnitTests.Shapes
 {

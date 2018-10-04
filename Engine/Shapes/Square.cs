@@ -4,7 +4,8 @@ using Engine.XyObjects;
 
 namespace Engine.Shapes
 {
-    public class Square: IShape
+    /*
+    public class Square: IShape, INode
     {
         //CTORS
         //PROPERTYS
@@ -30,9 +31,20 @@ namespace Engine.Shapes
             set
             {
                 _point = value;
+                RefreshPoints();
                 OnShapeEdited();
             }
         }
+
+        private void RefreshPoints()
+        {
+            _points.Clear();
+            _points.Add(new PointMy(_point.X, _point.Y));
+            _points.Add(new PointMy(_point.X, _point.Y + _size.Y));
+            _points.Add(new PointMy(_point.X + _size.X, _point.Y + _size.Y));
+            _points.Add(new PointMy(_point.X + _size.X, _point.Y));
+        }
+
         public SizeMy Size
         {
             get => _size;
@@ -48,22 +60,27 @@ namespace Engine.Shapes
         public ShapeStates State { get; set; } = ShapeStates.Basic;
 
         //PUBLIC METHODS
-        public IReadOnlyCollection<PointMy> GetPoints()
-        {
-            var res = new List<PointMy>();
-            res.Clear();
-            res.Add(new PointMy(_point.X, _point.Y));
-            res.Add(new PointMy(_point.X, _point.Y + _size.Y));
-            res.Add(new PointMy(_point.X + _size.X, _point.Y + _size.Y));
-            res.Add(new PointMy(_point.X + _size.X, _point.Y));
-            return res;
-        }
+        public IReadOnlyCollection<PointMy> Points => _points;
+
+        public IReadOnlyCollection<EdgeParams> EdgeParams => _edgeParams;
+
 
         public void Clear()
         {
             _point = new PointMy(0, 0);
             _size = new SizeMy(0, 0);
+            RefreshPoints();
+            ResetEdgeParams();
             OnShapeEdited();
+        }
+
+        private void ResetEdgeParams()
+        {
+            _edgeParams.Clear();
+
+            for (int i = 0; i < 4; i++)
+                _edgeParams.Add(Shapes.EdgeParams.Empty);
+
         }
 
         public override string ToString()
@@ -82,17 +99,24 @@ namespace Engine.Shapes
         }
 
         //EVENT STUFF
-        public event ShapeEventHandler ShapeEdited;
+        public void Delete()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public event NoAtributeEventHandler Edited;
+
         protected virtual void OnShapeEdited()
         {
-            ShapeEdited?.Invoke();
+            Edited?.Invoke();
         }
 
         //PRIVATE PART
         private SizeMy _size;
         private PointMy _point;
-
+        private readonly List<PointMy> _points = new List<PointMy>();
+        private readonly List<EdgeParams> _edgeParams = new List<EdgeParams>();
     }
 
-   
+   */
 }

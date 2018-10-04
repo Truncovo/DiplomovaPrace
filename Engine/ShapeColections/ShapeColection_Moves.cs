@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using Engine.Shapes;
 
-namespace Engine.ShapeColection
+namespace Engine.ShapeColections
 {
+
     public partial class ShapeColection
     {
         public void MoveShapeTo(IShape shape, int position)

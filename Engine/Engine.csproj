@@ -38,15 +38,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ShapeColection\IShapeColection.cs" />
-    <Compile Include="ShapeColection\ShapeColection_Getters.cs" />
-    <Compile Include="ShapeColection\ShapeColection_Moves.cs" />
+    <Compile Include="NoAtributeEventHandler.cs" />
+    <Compile Include="ShapeColections\IShapeColection.cs" />
+    <Compile Include="ShapeColections\ShapeColection_Getters.cs" />
+    <Compile Include="ShapeColections\ShapeColection_Moves.cs" />
+    <Compile Include="ShapeColections\ShapeColection__INode.cs" />
+    <Compile Include="Shapes\ShapeParts\EdgeParams.cs" />
+    <Compile Include="Shapes\INode.cs" />
     <Compile Include="Shapes\IShape.cs" />
+    <Compile Include="Shapes\ShapeParts\NodePoint.cs" />
     <Compile Include="Shapes\Polygon.cs" />
     <Compile Include="Shapes\ShapeStates.cs" />
     <Compile Include="Skladba.cs" />
     <Compile Include="XyObjects\PointMy.cs" />
-    <Compile Include="ShapeColection\ShapeColection.cs" />
+    <Compile Include="ShapeColections\ShapeColection.cs" />
     <Compile Include="XyObjects\SizeMy.cs" />
     <Compile Include="Shapes\Square.cs" />
     <Compile Include="XyObjects\XY.cs" />
@@ -56,6 +61,9 @@
       <Project>{86E5C07A-4B9F-47D4-80C4-2F8012495CF4}</Project>
       <Name>ISO13370</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

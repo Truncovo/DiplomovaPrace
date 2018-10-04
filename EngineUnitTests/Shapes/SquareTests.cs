@@ -21,7 +21,7 @@ namespace EngineUnitTests.Shapes
         {
             //SetUp
             var timesCalled = 0;
-            _square.ShapeEdited += () => { timesCalled++; };
+            _square.Edited += () => { timesCalled++; };
             //act
             _square.Size = new SizeMy(3, 3);
             //Assert
@@ -34,7 +34,7 @@ namespace EngineUnitTests.Shapes
         {
             //SetUp
             var timesCalled = 0;
-            _square.ShapeEdited += () => { timesCalled++; };
+            _square.Edited += () => { timesCalled++; };
             //act
             _square.Point = new PointMy(3, 3);
             //Assert
@@ -47,7 +47,7 @@ namespace EngineUnitTests.Shapes
             //SetUp
             _square = new Square();       
             //Act
-            var res = _square.GetPoints();
+            var res = _square.Points();
             //Assert
             var expectedRes = new List<PointMy>
             {
@@ -64,7 +64,7 @@ namespace EngineUnitTests.Shapes
         {
             //SetUp
             //Act
-            var res = _square.GetPoints();
+            var res = _square.Points();
             //Assert
             var expectedRes = new List<PointMy>
             {
@@ -92,7 +92,7 @@ namespace EngineUnitTests.Shapes
         {
             //SetUp
             var timesCalled = 0;
-            _square.ShapeEdited += () => { timesCalled++; };
+            _square.Edited += () => { timesCalled++; };
             //act
             _square.Clear();
             //Assert

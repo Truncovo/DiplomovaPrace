@@ -27,7 +27,7 @@ namespace EngineUnitTests.Shapes
             _polygon.Add(new PointMy(3, 3));
 
             _timesCalled = 0;
-            _polygon.ShapeEdited += () => { _timesCalled++; };
+            _polygon.Edited += () => { _timesCalled++; };
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace EngineUnitTests.Shapes
         {
             //arange
             //act
-            var res = _polygon.GetPoints();
+            var res = _polygon.Points();
             //assert
             CollectionAssert.AreEquivalent(_pointsInPolygon,res);
         }
@@ -47,7 +47,7 @@ namespace EngineUnitTests.Shapes
             _polygon.Add(new PointMy(4,4));
             //assert
             _pointsInPolygon.Add(new PointMy(4,4));
-            CollectionAssert.AreEquivalent(_pointsInPolygon,_polygon.GetPoints());
+            CollectionAssert.AreEquivalent(_pointsInPolygon,_polygon.Points());
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace EngineUnitTests.Shapes
             //act
             _polygon.Clear();
             //assert
-            CollectionAssert.IsEmpty(_polygon.GetPoints());
+            CollectionAssert.IsEmpty(_polygon.Points());
         }
         [Test]
         public void Clear_WhenCalled_OnShapeEditedIsInvoked()

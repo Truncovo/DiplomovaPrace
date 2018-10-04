@@ -1,7 +1,7 @@
 using System.Linq;
-using Engine.ShapeColection;
 using Engine.Shapes;
 using NUnit.Framework;
+using ShapeColection = Engine.ShapeColections.ShapeColection;
 
 namespace EngineUnitTests.Shapes
 {

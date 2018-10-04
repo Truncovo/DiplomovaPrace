@@ -6,10 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Engine;
-using Engine.ShapeColection;
 using Engine.Shapes;
 using Engine.XyObjects;
+using ShapeColection = Engine.ShapeColections.ShapeColection;
 
 namespace Visual
 {
@@ -31,9 +30,9 @@ namespace Visual
                 return;
 
             Polyline polyline = new Polyline();
-            foreach (PointMy point in shape.GetPoints())
+            foreach (PointMy point in shape.Points)
                 polyline.Points.Add(new Point(point.X,point.Y));
-            foreach (PointMy point in shape.GetPoints())
+            foreach (PointMy point in shape.Points)
             { 
                 polyline.Points.Add(new Point(point.X, point.Y));
                 break;

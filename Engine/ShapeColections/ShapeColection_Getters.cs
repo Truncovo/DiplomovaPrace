@@ -2,9 +2,9 @@
 using System.Linq;
 using Engine.Shapes;
 
-namespace Engine.ShapeColection
+namespace Engine.ShapeColections
 {
-    public partial class ShapeColection
+    public partial class ShapeColection 
     {
         public IEnumerable<IShape> GetColection()
         {
@@ -15,5 +15,6 @@ namespace Engine.ShapeColection
         {
             return _storage.AsReadOnly().Where(s => s.State == state);
         }
+
     }
 }

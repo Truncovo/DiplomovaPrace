@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using Engine.ShapeColections;
+using Engine.Shapes.ShapeParts;
 using Engine.XyObjects;
 
 namespace Engine.Shapes
 {
-    public interface IShape
+    public interface IShape : INode
     {
-        ShapeStates State { get; set; }
         Skladba Skladba { get; set; }
+        ShapeColection ShapeColectionParent { get;}
 
-        IReadOnlyCollection<PointMy> GetPoints();
+        IReadOnlyCollection<PointMy> Points { get; }
+        IReadOnlyCollection<EdgeParams> EdgeParams { get; }
 
         void Clear();
-
-        event ShapeEventHandler ShapeEdited;
     }
 }

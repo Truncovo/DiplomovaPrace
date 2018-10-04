@@ -1,38 +1,54 @@
 ﻿using System.Collections.Generic;
+using Engine.ShapeColections;
+using Engine.Shapes.ShapeParts;
 using Engine.XyObjects;
 
 namespace Engine.Shapes
 {
-    public delegate void ShapeEventHandler();
 
     public class Polygon : IShape
     {
         //CTORS
-        public Polygon(Skladba skladba = null)
+        public Polygon(ShapeColection parent,Skladba skladba = null)
         {
             Skladba = skladba;
+            ShapeColectionParent = parent;
         }
 
         //PROPERTYS
-        public ShapeStates State { get; set; } = ShapeStates.Basic;
+        private ShapeStates _state = ShapeStates.Basic;
+        public ShapeStates State
+        {
+            get => _state;
+            set
+            {
+                _state = value;
+                OnEdited();
+            }
+        }
+
+        public IEnumerable<INode> Childs { get; }
+        public ShapeColection ShapeColectionParent { get; }
+        public INode Parent => ShapeColectionParent;
+
         public Skladba Skladba { get; set; }
 
         //PUBLIC METHODS
-        public IReadOnlyCollection<PointMy> GetPoints()
-        {
-            return _points.AsReadOnly();
-        }
+        public IReadOnlyCollection<PointMy> Points => _points.AsReadOnly();
+        public IReadOnlyCollection<EdgeParams> EdgeParams=> _edgeParams.AsReadOnly();
+
 
         public virtual void Add(PointMy pointMy)
         {
             _points.Add(pointMy);
-            OnShapeEdited();
+            _edgeParams.Add(new EdgeParams(this));
+            OnEdited();
         }
 
         public virtual void Clear()
         {
             _points.Clear();
-            OnShapeEdited();
+            OnEdited();
         }
 
         public override string ToString()
@@ -43,18 +59,20 @@ namespace Engine.Shapes
         }
 
         //EVENT STUFF
-        public event ShapeEventHandler ShapeEdited;
-        protected virtual void OnShapeEdited()
+        public void Delete()
         {
-            ShapeEdited?.Invoke();
+            throw new System.NotImplementedException();
+        }
+
+        public event NoAtributeEventHandler Edited;
+        protected virtual void OnEdited()
+        {
+            Edited?.Invoke();
         }
 
         //PRIVATE PART
         private readonly List<PointMy> _points = new List<PointMy>();
+        private readonly List<EdgeParams> _edgeParams = new List<EdgeParams>();
 
-
-        
-
-        
     }
 }
