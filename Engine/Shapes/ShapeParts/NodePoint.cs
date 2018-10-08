@@ -21,6 +21,11 @@ namespace Engine.Shapes.ShapeParts
         }
 
         //PROPERTY - tree parts
+        public void SetStateToAllChilds(ShapeStates state)
+        {
+            State = state;
+        }
+
         public IEnumerable<INode> Childs => new List<INode>();
         public IShape ShapeParent { get; }
         public INode Parent => ShapeParent;
@@ -45,9 +50,14 @@ namespace Engine.Shapes.ShapeParts
             } }
 
         //PUBLIC FIELDS
-        public void Delete()
+        public void DeleteYourself()
         {
-            throw new System.NotImplementedException();
+            ShapeParent.DeletePoint(this);
+        }
+
+        public override string ToString()
+        {
+            return "NODE POINT " + Point + " ST:" + State;
         }
 
         //EVENT PARTS

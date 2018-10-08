@@ -12,10 +12,16 @@ namespace Engine.Shapes.ShapeParts
         }
 
         //PROPERTY - tree parts
+        public void SetStateToAllChilds(ShapeStates state)
+        {
+            State = state;
+        }
+
         public IEnumerable<INode> Childs => new List<INode>();
         public INode Parent => ShapeParent;
         public IShape ShapeParent { get; }
 
+        public EdgeValues EdgeValues { get; set; }
         //PROPERTY - has private field
         public ShapeStates State
         {
@@ -28,8 +34,8 @@ namespace Engine.Shapes.ShapeParts
         }
 
         //TODO create real settings
-        private int _edgeValue;
-        public int EdgeValue
+        private double _edgeValue; 
+        public double EdgeValue
         {
             get => _edgeValue;
             set
@@ -40,9 +46,14 @@ namespace Engine.Shapes.ShapeParts
         }
 
         //PUBLIC FIELDS
-        public void Delete()
+        public void DeleteYourself()
         {
             throw new System.NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return "EV: " + EdgeValue;
         }
 
         //EVENT PARTS

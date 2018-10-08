@@ -7,6 +7,7 @@ using ShapeColection = Engine.ShapeColections.ShapeColection;
 
 namespace EngineUnitTests.Shapes
 {
+    /*
     [TestFixture]
     public class ShapeColectionTests
     {
@@ -130,4 +131,5 @@ namespace EngineUnitTests.Shapes
         }
 
     }
+    */
 }

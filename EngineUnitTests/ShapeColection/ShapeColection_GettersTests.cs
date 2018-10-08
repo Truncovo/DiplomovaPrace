@@ -1,10 +1,11 @@
 using System.Linq;
+using Engine.ShapeColections;
 using Engine.Shapes;
 using NUnit.Framework;
-using ShapeColection = Engine.ShapeColections.ShapeColection;
 
 namespace EngineUnitTests.Shapes
 {
+    /*
     [TestFixture]
     public class ShapeColection_GettersTests
     {
@@ -61,6 +62,7 @@ namespace EngineUnitTests.Shapes
             Assert.AreEqual(1,res.Count());
         }
 
-
+    
     }
+    */
 }

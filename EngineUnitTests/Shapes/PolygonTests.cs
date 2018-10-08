@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace EngineUnitTests.Shapes
 {
+    /*
     [TestFixture]
     public class PolygonTests
     {
@@ -76,4 +77,5 @@ namespace EngineUnitTests.Shapes
             Assert.AreEqual(_timesCalled,1);
         }
     }
+    */
 }

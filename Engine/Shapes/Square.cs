@@ -1,10 +1,59 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using Engine.ShapeColections;
+using Engine.Shapes.ShapeParts;
 using Engine.XyObjects;
 
 namespace Engine.Shapes
 {
+    public class Square : IShape
+    {
+        public ShapeStates State { get; set; }
+        public void SetStateToAllChilds(ShapeStates state)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<INode> Childs { get; }
+        public INode Parent { get; }
+        public void DeleteYourself()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public event NoAtributeEventHandler Edited;
+        public Skladba Skladba { get; set; }
+        public IShapeColection ShapeColectionParent { get; }
+        public int EdgesCount(ShapeStates state)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetSelectedEdges(EdgeValues values)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IReadOnlyList<NodePoint> Points { get; }
+        public IReadOnlyList<EdgeParams> EdgeParams { get; }
+        public void Clear()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeletePoint(NodePoint nodePoint)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteEdge(EdgeParams nodePoint)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
     /*
+     * 
     public class Square: IShape, INode
     {
         //CTORS

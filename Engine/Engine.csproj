@@ -46,6 +46,7 @@
     <Compile Include="Shapes\ShapeParts\EdgeParams.cs" />
     <Compile Include="Shapes\INode.cs" />
     <Compile Include="Shapes\IShape.cs" />
+    <Compile Include="Shapes\ShapeParts\EdgeValues.cs" />
     <Compile Include="Shapes\ShapeParts\NodePoint.cs" />
     <Compile Include="Shapes\Polygon.cs" />
     <Compile Include="Shapes\ShapeStates.cs" />

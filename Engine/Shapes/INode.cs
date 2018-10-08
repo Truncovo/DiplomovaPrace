@@ -6,10 +6,13 @@ namespace Engine.Shapes
     {
         ShapeStates State { get; set; }
 
+        void SetStateToAllChilds(ShapeStates state);
+
         IEnumerable<INode> Childs { get; }
+
         INode Parent { get; }
 
-        void Delete();
+        void DeleteYourself();
 
         event NoAtributeEventHandler Edited;
     }
