@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using Engine.Shapes.ShapeParts;
 using Engine.XyObjects;
 
-namespace Visual2
+namespace Visual.Presets
 {
     public class NodePointLine : GetXyLine
     {

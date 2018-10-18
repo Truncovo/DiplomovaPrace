@@ -38,32 +38,34 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Panels\ColectionDisplayPanel\BrushesFtd.cs" />
-    <Compile Include="Panels\ColectionDisplayPanel\PointsBorder.cs" />
-    <Compile Include="Panels\ColectionDisplayPanel\PointStackPanel.cs" />
-    <Compile Include="Panels\ColectionDisplayPanel\ShapeColectionInfoStackPanel.cs" />
-    <Compile Include="Panels\ColectionDisplayPanel\ShapeInfoStackPanel.cs" />
-    <Compile Include="Panels\ColectionDisplayPanel\ShapesInBorder.cs" />
-    <Compile Include="Panels\EditEdgesPanel.cs" />
-    <Compile Include="Panels\EditShapesPanel.cs" />
-    <Compile Include="Panels\MainEditPanel.cs" />
-    <Compile Include="Panels\CreatePanel.cs" />
-    <Compile Include="Panels\EditShapePanel.cs" />
-    <Compile Include="Platno\MainCanvas.cs" />
-    <Compile Include="Platno\MainCanvasBoxing.cs" />
-    <Compile Include="Platno\ShapeCanvas.cs" />
+    <Compile Include="Panels\EditPanelparts\EditEdgeValuePanel.cs" />
+    <Compile Include="Panels\EditPanelparts\EditLambdaPanel.cs" />
+    <Compile Include="Panels\EditPanelparts\GeneralSettingsPanel.cs" />
+    <Compile Include="Panels\InfoPanelParts\BrushesFtd.cs" />
+    <Compile Include="Panels\InfoPanelParts\PointsInfo.cs" />
+    <Compile Include="Panels\InfoPanelParts\PointInfo.cs" />
+    <Compile Include="Panels\InfoPanelParts\ShapeColectionHeadInfo.cs" />
+    <Compile Include="Panels\InfoPanelParts\ShapeInfo.cs" />
+    <Compile Include="Panels\InfoPanelParts\AllShapesInfo.cs" />
+    <Compile Include="Panels\EditPanelparts\EditEdgesPanel.cs" />
+    <Compile Include="Panels\EditPanelparts\EditShapesPanel.cs" />
+    <Compile Include="Panels\EditPanel.cs" />
+    <Compile Include="Panels\EditPanelparts\CreatePanel.cs" />
+    <Compile Include="Panels\EditPanelparts\EditShapePanel.cs" />
+    <Compile Include="Canvases\MainCanvas.cs" />
+    <Compile Include="Canvases\MainCanvasBoxing.cs" />
+    <Compile Include="Canvases\ShapeCanvas.cs" />
     <Compile Include="Presets\GetXyLine.cs" />
     <Compile Include="Presets\DoubleBox.cs" />
-    <Compile Include="Presets\GetXyLineWithDelete.cs" />
     <Compile Include="Presets\NodePointLine.cs" />
-    <Compile Include="Presets\OkResetGrid.cs" />
+    <Compile Include="Presets\SquarePointLine.cs" />
+    <Compile Include="Presets\SquareSizeLine.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Presets\PresetTextBlock.cs" />
     <Compile Include="Presets\PresetButton.cs" />
     <Compile Include="MainApp.cs" />
-    <Compile Include="Panels\ColectionDisplayPanel\ShapeColectionDisplayStackPanel.cs" />
+    <Compile Include="Panels\InfoPanel.cs" />
     <Compile Include="Texts.cs" />
-    <Compile Include="tmpClasses\ToolStackPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />

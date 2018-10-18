@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Visual2
+namespace Visual.Presets
 {
     public class DoubleBox : TextBox
     {

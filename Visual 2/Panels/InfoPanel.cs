@@ -1,30 +1,30 @@
 ﻿using System.Windows.Controls;
 using Engine.ShapeColections;
+using Visual.Panels.InfoPanelParts;
 
-namespace Visual.Panels.ColectionDisplayPanel
+namespace Visual.Panels
 {
     //Display all informations about colection 
     //- most of it in text, all object are recreated when colection changed
 
-    public class ShapeColectionDisplayPanel : StackPanel
+    public class InfoPanel: StackPanel
     {
         private readonly ShapeColection _shapeColection;
 
-        public ShapeColectionDisplayPanel(ShapeColection shapeColection)
+        public InfoPanel(ShapeColection shapeColection)
         {
-            Orientation = Orientation.Vertical;
-
-
             _shapeColection = shapeColection;
             _shapeColection.Edited += Refil;
+
+            Orientation = Orientation.Vertical;
             Refil();
         }
 
         private void Refil()
         {
             Children.Clear();
-            Children.Add(new ShapeColectionInfoStackPanel(_shapeColection));
-            Children.Add(new ShapesInBorder(_shapeColection));
+            Children.Add(new ShapeColectionHeadInfo(_shapeColection));
+            Children.Add(new AllShapesInfo(_shapeColection));
         }
     }
 }

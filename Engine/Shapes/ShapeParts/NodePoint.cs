@@ -6,10 +6,11 @@ namespace Engine.Shapes.ShapeParts
     public class NodePoint : INode
     {
         //CTORS
-        private NodePoint(IShape parent)
+        public NodePoint(IShape parent)
         {
             ShapeParent = parent;
             _state = ShapeStates.Basic;
+            
         }
         public NodePoint(IShape parent, int x, int y):this(parent)
         {
@@ -69,7 +70,7 @@ namespace Engine.Shapes.ShapeParts
         
         //PRIVATE FIELDS
         private ShapeStates _state;
-        private PointMy _point;
+        private PointMy _point = new PointMy(0,0);
 
     }
 }

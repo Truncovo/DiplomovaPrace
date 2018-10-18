@@ -3,32 +3,36 @@ using System.Windows.Controls;
 using Engine.ShapeColections;
 using Engine.Shapes;
 
-namespace Visual.Panels.ColectionDisplayPanel
+namespace Visual.Panels.InfoPanelParts
 {
-    public class ShapeColectionInfoStackPanel : StackPanel
+    //Panel - shows general info about colection
+    public class ShapeColectionHeadInfo : StackPanel
     {
-        public ShapeColectionInfoStackPanel(ShapeColection shapeColection)
+        public ShapeColectionHeadInfo(ShapeColection shapeColection)
         {
-
             Orientation = Orientation.Vertical;
 
             Children.Add(new TextBlock{Text = "SHAPE COLECTION"});
+
+            //add info about shapes count
             Children.Add(new TextBlock {
                 Text = "shapes: " +
                        shapeColection.CountOfShapes(ShapeStates.Selected) +
                        "/"  +
-                       shapeColection.GetColection().Count()
+                       shapeColection.GetShapes().Count()
             });
+
+            //add info about edges count
             Children.Add(new TextBlock
             {
                 Text = "edges: " +
                        shapeColection.CountOfEdges(ShapeStates.Selected) +
                        "/" +
-                       (shapeColection.CountOfEdges(ShapeStates.Selected) + shapeColection.CountOfEdges(ShapeStates.Basic) + shapeColection.CountOfEdges(ShapeStates.Temporary))
+                       (shapeColection.CountOfEdges(ShapeStates.Selected) + shapeColection.CountOfEdges(ShapeStates.Basic) )
             });
 
 
-            Background = BrushesFtd.Colection;
+            Background = BrushesFI.Colection;
 
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Engine.ShapeColections;
 
-namespace Visual2
+namespace Visual.Canvases
 {
     public class MainCanvas : Canvas
     {
@@ -22,7 +22,7 @@ namespace Visual2
         private void RenderShapes()
         {
             Children.Clear();
-            foreach (var shape in _shapeColection.GetColection())
+            foreach (var shape in _shapeColection.GetShapes())
                 Children.Add(new ShapeCanvas(shape));
         }
 

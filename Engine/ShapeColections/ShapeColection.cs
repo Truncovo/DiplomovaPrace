@@ -1,31 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization.Formatters;
 using Engine.Shapes;
 
 namespace Engine.ShapeColections
 {
     public partial class ShapeColection : IShapeColection 
     {
-        //CTORS
+        public ShapeColection()
+        {
+            _colectionData = new ColectionData();
+            _colectionData.Edited += OnShapeColectionEdited;
+        }
 
-        //PROPERTYS
-
-        public void Add(IShape shape)
+        public void AddShape(IShape shape)
         {
             _storage.Add(shape);
             shape.Edited += OnShapeColectionEdited;
             OnShapeColectionChanged();
         }
-
-        public void Remove(IShape shape)
+        public void RemoveShape(IShape shape)
         {
            shape.Edited -= OnShapeColectionEdited;
             _storage.Remove(shape);
             OnShapeColectionChanged();
         }
-
         public void Clear()
         {
             foreach (IShape shape in _storage)
@@ -35,14 +33,17 @@ namespace Engine.ShapeColections
             OnShapeColectionChanged();
         }
 
-        public int CountOfShapes(ShapeStates state)
+        private ColectionData _colectionData;
+        public ColectionData ColectionData
         {
-            return _storage.Aggregate(0, (i, s) => i + (s.State == state?1:0));
-        }
-
-        public int CountOfEdges(ShapeStates state)
-        {
-            return _storage.Aggregate(0, (i, s) => i + s.EdgesCount(state));
+            get => _colectionData;
+            set
+            {
+                _colectionData.Edited -= OnShapeColectionChanged;
+                _colectionData = value;
+                _colectionData.Edited += OnShapeColectionChanged;
+                OnShapeColectionChanged();
+            }
         }
 
         public void SetSelectedShapes(Skladba skladba)
@@ -50,12 +51,6 @@ namespace Engine.ShapeColections
             foreach (var shape in _storage)
                 if (shape.State == ShapeStates.Selected)
                     shape.Skladba = skladba;
-        }
-
-        public void DeleteShape(IShape shape)
-        {
-            _storage.Remove(shape);
-            OnShapeColectionChanged();
         }
 
         //EVENT STUFF

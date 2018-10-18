@@ -43,14 +43,15 @@
     <Compile Include="ShapeColections\ShapeColection_Getters.cs" />
     <Compile Include="ShapeColections\ShapeColection_Moves.cs" />
     <Compile Include="ShapeColections\ShapeColection__INode.cs" />
+    <Compile Include="Shapes\Shape.cs" />
     <Compile Include="Shapes\ShapeParts\EdgeParams.cs" />
-    <Compile Include="Shapes\INode.cs" />
+    <Compile Include="INode.cs" />
     <Compile Include="Shapes\IShape.cs" />
     <Compile Include="Shapes\ShapeParts\EdgeValues.cs" />
     <Compile Include="Shapes\ShapeParts\NodePoint.cs" />
     <Compile Include="Shapes\Polygon.cs" />
     <Compile Include="Shapes\ShapeStates.cs" />
-    <Compile Include="Skladba.cs" />
+    <Compile Include="Shapes\ShapeParts\Skladba.cs" />
     <Compile Include="XyObjects\PointMy.cs" />
     <Compile Include="ShapeColections\ShapeColection.cs" />
     <Compile Include="XyObjects\SizeMy.cs" />

@@ -7,16 +7,23 @@ namespace Engine.ShapeColections
 {
     public partial class ShapeColection 
     {
-        public IEnumerable<IShape> GetColection()
+        public int CountOfShapes(ShapeStates state)
+        {
+            return _storage.Aggregate(0, (i, s) => i + (s.State == state ? 1 : 0));
+        }
+        public IEnumerable<IShape> GetShapes()
         {
             return _storage.AsReadOnly();
         }
-
-        public IEnumerable<IShape> GetColection(ShapeStates state)
+        public IEnumerable<IShape> GetShapes(ShapeStates state)
         {
             return _storage.AsReadOnly().Where(s => s.State == state);
         }
 
+        public int CountOfEdges(ShapeStates state)
+        {
+            return _storage.Aggregate(0, (i, s) => i + s.EdgesCount(state));
+        }
         public IEnumerable<EdgeParams> GetEdges(ShapeStates state)
         {
             List<EdgeParams> res = new List<EdgeParams>();
@@ -31,7 +38,5 @@ namespace Engine.ShapeColections
             //    .Aggregate(res, (current, shape) => current.Concat(shape.EdgeParams))
             //    .Where(e => e.State == state);
         }
-
-
     }
 }

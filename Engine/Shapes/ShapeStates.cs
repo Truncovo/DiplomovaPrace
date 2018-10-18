@@ -1,4 +1,4 @@
 ﻿namespace Engine.Shapes
 {
-    public enum ShapeStates {Basic, Selected, Temporary }
+    public enum ShapeStates {Basic, Selected }
 }

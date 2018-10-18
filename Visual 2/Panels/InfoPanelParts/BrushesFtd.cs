@@ -1,8 +1,9 @@
 using System.Windows.Media;
 
-namespace Visual.Panels.ColectionDisplayPanel
+namespace Visual.Panels.InfoPanelParts
 {
-    public static class BrushesFtd
+    //brushes for info classes
+    public static class BrushesFI
     {
         public static Brush Colection => Brushes.Crimson;
         public static Brush ShapeSelected=> Brushes.BurlyWood;

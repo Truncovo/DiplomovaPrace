@@ -1,8 +1,7 @@
 using System.Windows.Controls;
-using Engine;
 using Engine.XyObjects;
 
-namespace Visual2
+namespace Visual.Presets
 {
     public class GetXyLine : Grid
     {
@@ -19,10 +18,10 @@ namespace Visual2
         public GetXyLine(string text)
         {
             ColumnDefinitions.Add(Settings.GetColumnDefinitionStar(0.5));
-            ColumnDefinitions.Add(Settings.GetColumnDefinitionStar(0.5));
-            ColumnDefinitions.Add(Settings.GetColumnDefinitionStar(0.5));
-            ColumnDefinitions.Add(Settings.GetColumnDefinitionStar(0.5));
-            ColumnDefinitions.Add(Settings.GetColumnDefinitionStar(0.5));
+            ColumnDefinitions.Add(Settings.GetColumnDefinitionStar(0.3));
+            ColumnDefinitions.Add(Settings.GetColumnDefinitionStar(0.8));
+            ColumnDefinitions.Add(Settings.GetColumnDefinitionStar(0.3));
+            ColumnDefinitions.Add(Settings.GetColumnDefinitionStar(0.8));
 
             int row = 0;
             var textBlock = new PresetTextBlock(text);

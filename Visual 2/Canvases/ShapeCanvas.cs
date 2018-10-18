@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -9,7 +7,7 @@ using System.Windows.Shapes;
 using Engine.Shapes;
 using Engine.Shapes.ShapeParts;
 
-namespace Visual2
+namespace Visual.Canvases
 {
     public class ShapeCanvas : Canvas
     {
@@ -34,21 +32,20 @@ namespace Visual2
 
             if (_shape.Points.Count < 2)
                 return;
-
             
-            PrintShape();
+            //put polyline on canvas (fill up shape with color)
+            DisplayShape();
 
+            //put line on canvas for each point on canvas
             for (int i = 0; i < _shape.Points.Count-1; i++)
-                PrintLine(_shape.Points[i], _shape.Points[i+1],_shape.EdgeParams[i]);
+                DisplayLine(_shape.Points[i], _shape.Points[i+1],_shape.EdgeParams[i]);
 
+            //put last line between first and last point
             int lastIndex = _shape.Points.Count - 1;
-            PrintLine(_shape.Points[lastIndex], _shape.Points[0], _shape.EdgeParams[lastIndex]);
-            
-
-            
+            DisplayLine(_shape.Points[lastIndex], _shape.Points[0], _shape.EdgeParams[lastIndex]);
         }
 
-        private void PrintShape()
+        private void DisplayShape()
         {
             var p = new Polyline();
             p.StrokeThickness = 6;
@@ -68,7 +65,7 @@ namespace Visual2
             Children.Add(p);
         }
 
-        private void PrintLine(NodePoint startPoint, NodePoint endPoint, EdgeParams edgeParams)
+        private void DisplayLine(NodePoint startPoint, NodePoint endPoint, EdgeParams edgeParams)
         {
             var line = new Line();
             line.X1 = startPoint.Point.X;

@@ -1,9 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Visual2
+namespace Visual.Canvases
 {
     public class MainCanvasBoxing : ScrollViewer
     {

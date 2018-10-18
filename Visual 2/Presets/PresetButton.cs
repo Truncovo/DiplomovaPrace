@@ -1,13 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Visual2
+namespace Visual.Presets
 {
     public class PresetButton : Button
     {

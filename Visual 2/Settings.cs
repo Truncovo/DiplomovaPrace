@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Visual2
+namespace Visual
 {
     public static class Settings
     {

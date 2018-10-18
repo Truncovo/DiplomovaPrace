@@ -7,6 +7,9 @@ namespace Engine.Shapes.ShapeParts
         //CTORS
         public EdgeParams(IShape parent)
         {
+            _edgeValues = new EdgeValues();
+            _edgeValues.Edited += OnEdited;
+
             _state = ShapeStates.Basic;
             ShapeParent = parent;
         }
@@ -21,7 +24,19 @@ namespace Engine.Shapes.ShapeParts
         public INode Parent => ShapeParent;
         public IShape ShapeParent { get; }
 
-        public EdgeValues EdgeValues { get; set; }
+        private EdgeValues _edgeValues;
+        public EdgeValues EdgeValues
+        {
+            get => _edgeValues;
+            set
+            {
+                if(_edgeValues != null)
+                    _edgeValues.Edited -= OnEdited;
+                _edgeValues = value;
+                _edgeValues.Edited += OnEdited;
+                OnEdited();
+            }
+        }
         //PROPERTY - has private field
         public ShapeStates State
         {
@@ -34,16 +49,7 @@ namespace Engine.Shapes.ShapeParts
         }
 
         //TODO create real settings
-        private double _edgeValue; 
-        public double EdgeValue
-        {
-            get => _edgeValue;
-            set
-            {
-                _edgeValue = value;
-                OnEdited();
-            }
-        }
+    
 
         //PUBLIC FIELDS
         public void DeleteYourself()
@@ -53,7 +59,7 @@ namespace Engine.Shapes.ShapeParts
 
         public override string ToString()
         {
-            return "EV: " + EdgeValue;
+            return "EP: " + _edgeValues ;
         }
 
         //EVENT PARTS

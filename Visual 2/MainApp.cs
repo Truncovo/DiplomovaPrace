@@ -3,13 +3,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Engine.Shapes;
+using Visual.Canvases;
 using Visual.Panels;
-using Visual.Panels.ColectionDisplayPanel;
 using ShapeColection = Engine.ShapeColections.ShapeColection;
 
-namespace Visual2
+namespace Visual
 {
-
     class MainApp
     {
         [STAThread]
@@ -17,6 +16,7 @@ namespace Visual2
         {
             var app = new Application();
             Window shapeWindow = new MainWindow();
+            app.MainWindow = shapeWindow;
             app.Run(shapeWindow);
         }
     }
@@ -24,47 +24,43 @@ namespace Visual2
     class MainWindow : Window
     {
 
-        private readonly ShapeColection _shapeColection;
-        private Grid _mainGrid;
-
-        //tmp to visualise
-
-
         public MainWindow()
         {
-            _shapeColection = new ShapeColection();
+            var shapeColection = new ShapeColection();
 
-            var polygon = new Polygon(_shapeColection);
+            //some content to shape colection for testing
+            var polygon = new Polygon(shapeColection);
             polygon.Add(0,0);
             polygon.Add(0, 200);
             polygon.Add(200, 200);
             polygon.Add(200, 0);
 
-            polygon = new Polygon(_shapeColection);
+            polygon = new Polygon(shapeColection);
             polygon.Add(200, 200);
             polygon.Add(200, 400);
             polygon.Add(400, 400);
             polygon.Add(400, 200);
 
-            _mainGrid = new Grid();
-            Content = _mainGrid;
-            _mainGrid.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(1300)});
-            _mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(250) });
-            _mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(250) });
+            
+            var mainGrid = new Grid();
+            Content = mainGrid;
+            mainGrid.ColumnDefinitions.Add(new ColumnDefinition{Width = new GridLength(900)});
+            mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(300) });
+            mainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(250) });
 
-
+            //create border for main canvas
             var border = new Border();
-            border.Child = new MainCanvas(_shapeColection);
-            border.BorderThickness = new Thickness(30);
+            border.Child = new MainCanvas(shapeColection);
+            border.BorderThickness = new Thickness(20);
             border.BorderBrush = Brushes.BlanchedAlmond;
-            _mainGrid.Children.Add(border);
+            mainGrid.Children.Add(border);
 
-            var mainEditPanel = new MainEditPanel(_shapeColection);
-            _mainGrid.Children.Add(mainEditPanel);
+            var mainEditPanel = new EditPanel(shapeColection);
+            mainGrid.Children.Add(mainEditPanel);
             Grid.SetColumn(mainEditPanel,1);
 
-            var shapeColectionDisplayStackPanel = new ShapeColectionDisplayPanel(_shapeColection);     
-            _mainGrid.Children.Add(shapeColectionDisplayStackPanel);
+            var shapeColectionDisplayStackPanel = new InfoPanel(shapeColection);     
+            mainGrid.Children.Add(shapeColectionDisplayStackPanel);
             Grid.SetColumn(shapeColectionDisplayStackPanel, 3);
 
 

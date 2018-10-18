@@ -25,7 +25,7 @@ namespace Engine.ShapeColections
 
         public void DeleteYourself()
         {
-            throw new System.NotImplementedException();
+            Clear();
         }
 
         public event NoAtributeEventHandler Edited;
@@ -44,7 +44,6 @@ namespace Engine.ShapeColections
             }
             return true;
         }
-
         private static void CheckChilds(INode nodeToCheck, INode expectedParent)
         {
             if (!ReferenceEquals(nodeToCheck.Parent, expectedParent))
@@ -56,6 +55,5 @@ namespace Engine.ShapeColections
                 CheckChilds(child, nodeToCheck);
             }
         }
-
     }
 }

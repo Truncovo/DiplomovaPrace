@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineUnitTests", "EngineUnitTests\EngineUnitTests.csproj", "{AE751842-699A-410E-9FAB-BA0ECFAB9245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visual2", "Visual 2\Visual2.csproj", "{3464ADFA-F555-4F7C-BF8C-22DCD081E537}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visual", "Visual 2\Visual.csproj", "{3464ADFA-F555-4F7C-BF8C-22DCD081E537}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
