@@ -10,7 +10,7 @@ namespace Visual.Presets
 
         private PresetButton _deleteButton;
 
-        private NodePoint _nodePoint;
+        private PointShell _nodePoint;
 
         public bool ActiceDeleteButton
         {
@@ -18,17 +18,17 @@ namespace Visual.Presets
             set => _deleteButton.IsEnabled = value;
         }
 
-        public NodePointLine(NodePoint nodePoint, string text) : base(text)
+        public NodePointLine(PointShell nodePoint, string text) : base(text)
         {
             CTOROnly(nodePoint);
         }
 
-        public NodePointLine(NodePoint nodePoint,string text, double x, double y) : base(text, x, y)
+        public NodePointLine(PointShell nodePoint,string text, double x, double y) : base(text, x, y)
         {
             CTOROnly(nodePoint);
         }
 
-        private void CTOROnly(NodePoint nodePoint)
+        private void CTOROnly(PointShell nodePoint)
         {
             _nodePoint = nodePoint;
             _pointX.Number = nodePoint.Point.X;

@@ -5,6 +5,8 @@ namespace Visual
 {
     public static class Settings
     {
+        public static double Tolerance { get; set; } = 0.0001d;
+
         public static RowDefinition GetRowDefinitionStar(double size)
         {
             RowDefinition rowDefinition = new RowDefinition();

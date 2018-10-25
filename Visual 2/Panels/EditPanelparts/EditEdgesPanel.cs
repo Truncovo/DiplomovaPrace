@@ -13,5 +13,6 @@ namespace Visual.Panels.EditPanelparts
             Children.Add(new EditEdgeValuePanel(shapeColection, EdgeValuesPropertyes.WallThickness));
         }
 
+       
     }
 }

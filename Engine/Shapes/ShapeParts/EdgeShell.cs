@@ -2,10 +2,10 @@
 
 namespace Engine.Shapes.ShapeParts
 {
-    public class EdgeParams : INode
+    public class EdgeShell : INode
     {
         //CTORS
-        public EdgeParams(IShape parent)
+        public EdgeShell(IShape parent)
         {
             _edgeValues = new EdgeValues();
             _edgeValues.Edited += OnEdited;
@@ -37,6 +37,16 @@ namespace Engine.Shapes.ShapeParts
                 OnEdited();
             }
         }
+
+        public EdgeShell GetCopy()
+        {
+            return new EdgeShell(ShapeParent)
+            {
+                EdgeValues = _edgeValues.GetCopy(),
+                State = _state
+            };
+        }
+
         //PROPERTY - has private field
         public ShapeStates State
         {

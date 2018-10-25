@@ -34,7 +34,7 @@ namespace Visual.Panels.EditPanelparts
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             if (sender is DoubleBox doubleBox)
-                _shapeColection.ColectionData.LamdaGround = doubleBox.Number;
+                _shapeColection.ColectionValues.LamdaGround = doubleBox.Number;
         }
     }
 }

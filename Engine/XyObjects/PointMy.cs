@@ -1,4 +1,6 @@
-﻿namespace Engine.XyObjects
+﻿using System;
+
+namespace Engine.XyObjects
 {
     public class PointMy : XY
     {
@@ -11,6 +13,11 @@
             return new PointMy(X, Y);
         }
 
+        public  PointMy Copy()
+        {
+            return (PointMy)this.Clone();
+
+        }
         public SizeMy ToSize()
         {
             return new SizeMy(X,Y);

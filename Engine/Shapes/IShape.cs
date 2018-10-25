@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Engine.Counts;
 using Engine.ShapeColections;
 using Engine.Shapes.ShapeParts;
 using Engine.XyObjects;
@@ -11,14 +12,25 @@ namespace Engine.Shapes
         Skladba Skladba { get; set; }
         IShapeColection ShapeColectionParent { get;}
 
-        int EdgesCount(ShapeStates state);
-        void SetSelectedEdges(EdgeValues values);
-        IReadOnlyList<NodePoint> Points { get; }
-        IReadOnlyList<EdgeParams> EdgeParams { get; }
-        
-        void Clear();
-        void DeletePoint(NodePoint nodePoint);
-        void DeleteEdge(EdgeParams nodePoint);
+        IReadOnlyList<PointShell> PointShells { get; }
+        IReadOnlyList<EdgeShell> EdgeShells { get; }
 
+        int EdgesCount();
+        int EdgesCount(ShapeStates state);
+
+        EdgeShell GetEdgeShell(int index);
+        PointShell GetPointShell(int index);
+
+        void SetAllEdgesToNotInContact();
+        int SplitEdges(IShape shape);
+        void SplitEdgeAsSecondFromResult(int index, List<bool> edgesInContact, List<PointMy> pointsToAdd);
+
+        void Optimize();
+        PointMy MaxLeftMaxTopPoint();
+        bool InvokeEdtited { get; set; }
+
+        void Clear();
+        void DeletePoint(PointShell nodePoint);
+        void DeleteEdge(EdgeShell nodePoint);
     }
 }

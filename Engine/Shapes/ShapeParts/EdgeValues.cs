@@ -40,17 +40,40 @@
                 OnEdited();
             }
         }
-        
+
+        private bool _inContact;
+        public  bool InContact
+        {
+            get => _inContact;
+            set
+            {
+                _inContact = value;
+                OnEdited();
+            }
+        }
+
+        public EdgeValues GetCopy()
+        {
+            return new EdgeValues
+            {
+                PsiEdge = _psiEdge,
+                Psi = _psi,
+                InContact = _inContact,
+                WallThickness = _wallThickness
+            };
+
+        }
+
         //EVENT PARTS
         public event NoAtributeEventHandler Edited;
         protected virtual void OnEdited()
         {
-            Edited?.Invoke();
+            //Edited?.Invoke();
         }
 
         public override string ToString()
         {
-            return "EV: [P: " + _psi + " Pe: " + _psiEdge + " WT: " + _wallThickness + " ]";
+            return "EV: [P: " + _psi + " Pe: " + _psiEdge + " WT: " + _wallThickness + " ]" + InContact;
         }
     }
 }

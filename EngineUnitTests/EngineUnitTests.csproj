@@ -53,9 +53,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Counting\EdgeAnaliserTests.cs" />
+    <Compile Include="Counting\EdgeAnaliser_AnalizeTests.cs" />
     <Compile Include="ShapeColection\ShapeColection_GettersTests.cs" />
     <Compile Include="Shapes\PolygonTests.cs" />
     <Compile Include="ShapeColection\ShapeColectionTests.cs" />
+    <Compile Include="Shapes\Shape_CalculationTests.cs" />
     <Compile Include="Shapes\SquareTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XYObjects\XYTests.cs" />

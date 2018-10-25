@@ -16,8 +16,8 @@ namespace Visual.Panels.InfoPanelParts
             var stackPanel = new StackPanel();
             Child = stackPanel;
 
-            for (int i = 0; i < shape.Points.Count; i++)
-                stackPanel.Children.Add(new PointInfo(shape.Points[i], shape.EdgeParams[i]));
+            for (int i = 0; i < shape.PointShells.Count; i++)
+                stackPanel.Children.Add(new PointInfo(shape.PointShells[i], shape.EdgeShells[i]));
         }
     }
 }

@@ -1,71 +1,87 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
+using Engine.Counts;
 using Engine.ShapeColections;
 using Engine.Shapes.ShapeParts;
 using Engine.XyObjects;
 
 namespace Engine.Shapes
 {
-    //----------------------------------------------------------
-    //----------------------------------------------------------
-
     public class Polygon : Shape
     {
         //CTORS
-        public Polygon()
-        {
-        }
-        public Polygon(IShapeColection parent) : base(parent)
-        {
-        }
+        public Polygon(){}
+        public Polygon(IShapeColection parent, bool add = true) : base(parent,add){}
 
-        //PUBLIC METHODS
-       
-
-        public virtual void Add(int x, int y)
+        //PUBLIC METHODS - polygon
+        public virtual void Add(int x, int y, EdgeShell edgeShell = null)
         {
-            Add(new PointMy(x,y));
+            Add(new PointMy(x,y),edgeShell);
         }
-        public virtual void Add(PointMy pointMy)
+        public virtual void Add(PointMy pointMy , EdgeShell edgeShell = null)
         {
-            var nodePoint = new NodePoint(this, pointMy);   
-           Add(nodePoint);
+            var nodePoint = new PointShell(this, pointMy);
+            nodePoint.Edited += OnEdited;
+           Add(nodePoint, edgeShell);
         }
-        public virtual void Add(NodePoint nodePoint)
+        public virtual void Add(PointShell nodePoint, EdgeShell edgeShell = null)
         {
-            _points.Add(nodePoint);
-            nodePoint.Edited += Edited;
+            _pointsShells.Add(nodePoint);
+            nodePoint.Edited += OnEdited;
 
-            var edgeParams = new EdgeParams(this);
-            edgeParams.Edited += Edited;
-            _edgeParams.Add(edgeParams);
+            if (edgeShell == null)
+                edgeShell = new EdgeShell(this);
+
+            edgeShell.Edited += OnEdited;
+            _edgeShells.Add(edgeShell);
             OnEdited();
-
         }
 
-        protected override void OnEdited()
+        //PUBLIC METHODS - overrided
+
+        public override void Optimize()
         {
-            Edited?.Invoke();
-            base.OnEdited();
+            if(_pointsShells.Count < 3)
+                DeleteYourself();
+
+
+            var prevPoint = PointShells.FirstOrDefault();
+
+            for (var i = 1; i < _pointsShells.Count; i++)
+            {
+                if (prevPoint != null && prevPoint.Point.Equals(_pointsShells[i].Point))
+                { 
+                    _pointsShells.RemoveAt(i);
+                    _edgeShells.RemoveAt(i-1);
+                    OnEdited();
+                    i--;
+                }
+                prevPoint = _pointsShells[i];
+            }
+
+            if (_pointsShells.Count < 3)
+                DeleteYourself();
         }
-
-        public override event NoAtributeEventHandler Edited;
-
-
+        public override PointMy MaxLeftMaxTopPoint()
+        {
+            //todo not working right
+            return _pointsShells[0].Point;
+        }
         public override string ToString()
         {
             var stringBuilder = new StringBuilder(40);
             stringBuilder.Append("POLYGON P: ");
-            stringBuilder.Append(_points.Count);
+            stringBuilder.Append(_pointsShells.Count);
             stringBuilder.Append(" EP:  ");
-            stringBuilder.Append(_edgeParams.Count);
+            stringBuilder.Append(_edgeShells.Count);
             stringBuilder.Append("\n");
-            foreach (var nodePoint in _points)
+            foreach (var nodePoint in _pointsShells)
             { 
                 stringBuilder.Append(nodePoint);
                 stringBuilder.Append("\n");
             }
-            foreach (var edgeParamse in _edgeParams)
+            foreach (var edgeParamse in _edgeShells)
             {
                 stringBuilder.Append(edgeParamse);
                 stringBuilder.Append("\n");
@@ -75,10 +91,5 @@ namespace Engine.Shapes
             return stringBuilder.ToString();
 
         }
-
-
-
-
-
     }
 }

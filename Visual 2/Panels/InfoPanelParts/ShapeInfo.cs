@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Controls;
 using Engine.Shapes;
 
@@ -8,18 +9,23 @@ namespace Visual.Panels.InfoPanelParts
         public ShapeInfo(IShape shape)
         {
             Orientation = Orientation.Vertical;
+
             
             //title + info about Skladba
-            Children.Add(new TextBlock { Text = "POLYGON Sk: " + shape.Skladba.Value });
+            if (shape is Square sq)
+                Children.Add(new TextBlock { Text = "SQUARE Sk: " + shape.Skladba.Value + "\n" });
+            else
+                Children.Add(new TextBlock { Text = "POLYGON Sk: " + shape.Skladba.Value});
+
 
             //count of points and edgeParams
-            if(shape.Points.Count != shape.EdgeParams.Count)
+            if (shape.PointShells.Count != shape.EdgeShells.Count)
                 Children.Add(new TextBlock
                 {
-                    Text = "POINTS: " + shape.Points.Count + " " + shape.EdgeParams.Count,
+                    Text = "POINTS: " + shape.PointShells.Count + " " + shape.EdgeShells.Count,
                 });
             else
-                Children.Add(new TextBlock { Text = "POINTS: " + shape.Points.Count });
+                Children.Add(new TextBlock { Text = "POINTS: " + shape.PointShells.Count });
 
             //add info about all points
             Children.Add(new PointsInfo(shape));

@@ -117,7 +117,7 @@ namespace Visual.Panels.EditPanelparts
         }
 
 
-        private void SetValue(EdgeParams edgeParams, double value)
+        private void SetValue(EdgeShell edgeParams, double value)
         {
             switch (_type)
             {
@@ -135,7 +135,7 @@ namespace Visual.Panels.EditPanelparts
             }
         }
 
-        private double GetValue(EdgeParams edgeParams)
+        private double GetValue(EdgeShell edgeParams)
         {
             switch (_type)
             {

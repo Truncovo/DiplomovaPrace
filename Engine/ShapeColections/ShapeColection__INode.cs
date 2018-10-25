@@ -15,11 +15,11 @@ namespace Engine.ShapeColections
         public void SetStateToAllChilds(ShapeStates state)
         {
             State = state;
-            foreach (var shape in _storage)
+            foreach (var shape in _shapes)
                 shape.SetStateToAllChilds(state);
         }
 
-        public IEnumerable<INode> Childs => _storage;
+        public IEnumerable<INode> Childs => _shapes;
 
         public INode Parent => null;
 
@@ -44,6 +44,7 @@ namespace Engine.ShapeColections
             }
             return true;
         }
+
         private static void CheckChilds(INode nodeToCheck, INode expectedParent)
         {
             if (!ReferenceEquals(nodeToCheck.Parent, expectedParent))

@@ -2,7 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Engine.Counts;
 using Engine.Shapes;
+using Engine.XyObjects;
 using Visual.Canvases;
 using Visual.Panels;
 using ShapeColection = Engine.ShapeColections.ShapeColection;
@@ -14,6 +16,9 @@ namespace Visual
         [STAThread]
         public static void Main()
         {
+            EdgeAnaliser.FromMain();
+
+          // return;
             var app = new Application();
             Window shapeWindow = new MainWindow();
             app.MainWindow = shapeWindow;
@@ -30,16 +35,18 @@ namespace Visual
 
             //some content to shape colection for testing
             var polygon = new Polygon(shapeColection);
+            polygon.Add(200, 100);
+            polygon.Add(200, 400);
+            polygon.Add(400, 400);
+            polygon.Add(400, 100);
+
+            polygon = new Polygon(shapeColection);
             polygon.Add(0,0);
             polygon.Add(0, 200);
             polygon.Add(200, 200);
             polygon.Add(200, 0);
 
-            polygon = new Polygon(shapeColection);
-            polygon.Add(200, 200);
-            polygon.Add(200, 400);
-            polygon.Add(400, 400);
-            polygon.Add(400, 200);
+          
 
             
             var mainGrid = new Grid();

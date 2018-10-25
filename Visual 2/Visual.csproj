@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Panels\EditPanelparts\EditEdgeValuePanel.cs" />
     <Compile Include="Panels\EditPanelparts\EditLambdaPanel.cs" />
+    <Compile Include="Panels\EditPanelparts\EngineSettingsPanel.cs" />
     <Compile Include="Panels\EditPanelparts\GeneralSettingsPanel.cs" />
     <Compile Include="Panels\InfoPanelParts\BrushesFtd.cs" />
     <Compile Include="Panels\InfoPanelParts\PointsInfo.cs" />

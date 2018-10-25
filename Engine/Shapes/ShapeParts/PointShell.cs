@@ -3,20 +3,20 @@ using Engine.XyObjects;
 
 namespace Engine.Shapes.ShapeParts
 {
-    public class NodePoint : INode
+    public class PointShell : INode
     {
         //CTORS
-        public NodePoint(IShape parent)
+        public PointShell(IShape parent)
         {
             ShapeParent = parent;
             _state = ShapeStates.Basic;
             
         }
-        public NodePoint(IShape parent, int x, int y):this(parent)
+        public PointShell(IShape parent, int x, int y):this(parent)
         {
             _point = new PointMy(x,y);
         }
-        public NodePoint(IShape parent, PointMy point) : this(parent)
+        public PointShell(IShape parent, PointMy point) : this(parent)
         {
             _point = point;
         }
@@ -30,6 +30,7 @@ namespace Engine.Shapes.ShapeParts
         public IEnumerable<INode> Childs => new List<INode>();
         public IShape ShapeParent { get; }
         public INode Parent => ShapeParent;
+
         
         //PROPERTY - has private field
         public ShapeStates State

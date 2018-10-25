@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -6,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Engine.Shapes;
 using Engine.Shapes.ShapeParts;
+using Visual.Presets;
 
 namespace Visual.Canvases
 {
@@ -30,19 +32,19 @@ namespace Visual.Canvases
             _lines.Clear();
             Children.Clear();
 
-            if (_shape.Points.Count < 2)
+            if (_shape.PointShells.Count < 2)
                 return;
             
             //put polyline on canvas (fill up shape with color)
             DisplayShape();
 
             //put line on canvas for each point on canvas
-            for (int i = 0; i < _shape.Points.Count-1; i++)
-                DisplayLine(_shape.Points[i], _shape.Points[i+1],_shape.EdgeParams[i]);
+            for (int i = 0; i < _shape.PointShells.Count-1; i++)
+                DisplayLine(_shape.PointShells[i], _shape.PointShells[i+1],_shape.EdgeShells[i]);
 
             //put last line between first and last point
-            int lastIndex = _shape.Points.Count - 1;
-            DisplayLine(_shape.Points[lastIndex], _shape.Points[0], _shape.EdgeParams[lastIndex]);
+            int lastIndex = _shape.PointShells.Count - 1;
+            DisplayLine(_shape.PointShells[lastIndex], _shape.PointShells[0], _shape.EdgeShells[lastIndex]);
         }
 
         private void DisplayShape()
@@ -56,16 +58,23 @@ namespace Visual.Canvases
             else
                 p.Fill = Brushes.BurlyWood;
 
-            foreach (var point in _shape.Points)
+            foreach (var point in _shape.PointShells)
             {
                 p.Points.Add(new Point(point.Point.X, point.Point.Y));
             }
             p.MouseDown += OnMouiseDownOnPolyline;
             
             Children.Add(p);
+
+            var rValue = new PresetTextBlock("R = " + _shape.Skladba.Value + " " + Texts.RUnit);
+            var topLeftPoint = _shape.MaxLeftMaxTopPoint();
+            Canvas.SetTop(rValue, topLeftPoint.Y);
+            Canvas.SetLeft(rValue, topLeftPoint.X);
+
+            Children.Add(rValue);
         }
 
-        private void DisplayLine(NodePoint startPoint, NodePoint endPoint, EdgeParams edgeParams)
+        private void DisplayLine(PointShell startPoint, PointShell endPoint, EdgeShell edgeParams)
         {
             var line = new Line();
             line.X1 = startPoint.Point.X;
@@ -86,9 +95,9 @@ namespace Visual.Canvases
             Children.Add(line);
         }
 
-        private EdgeParams GetEdgeParamsFromLine(Line line)
+        private EdgeShell GetEdgeParamsFromLine(Line line)
         {
-            return _shape.EdgeParams[_lines.IndexOf(line)];
+            return _shape.EdgeShells[_lines.IndexOf(line)];
         }
 
         private void OnMouiseDownOnPolyline(object sender, MouseButtonEventArgs e)

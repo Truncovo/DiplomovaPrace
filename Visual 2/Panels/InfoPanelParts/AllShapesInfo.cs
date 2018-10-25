@@ -11,7 +11,7 @@ namespace Visual.Panels.InfoPanelParts
         public AllShapesInfo(ShapeColection shapeColection)
         {
             //set border
-            BorderThickness = new Thickness(10);
+            BorderThickness = new Thickness(5);
             BorderBrush = BrushesFI.Colection;
 
             //create and set stack panel for all shapes

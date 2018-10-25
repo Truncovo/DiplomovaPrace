@@ -25,6 +25,14 @@ namespace Visual.Panels
             _shapeColection.Edited += OnShapeColectionEdited;
 
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
+            Settings.PlaceInGridAndAdd(new EngineSettingsPanel(_shapeColection), grid, positionInGrid++, 0);
+
+
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20) });
+            Settings.PlaceInGridAndAdd(new Rectangle { Fill = Brushes.BlanchedAlmond }, grid, positionInGrid++, 0);
+
+
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
             Settings.PlaceInGridAndAdd(new GeneralSettingsPanel(_shapeColection), grid, positionInGrid++, 0);
 
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20) });

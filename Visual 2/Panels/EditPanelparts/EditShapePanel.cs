@@ -58,7 +58,7 @@ namespace Visual.Panels.EditPanelparts
 
         private void OneShapeSelected(IShape shape)
         {
-            if (ReferenceEquals(shape, _selectedShape) && shape.Points.Count == (Children.Count -2) )
+            if (ReferenceEquals(shape, _selectedShape) && shape.PointShells.Count == (Children.Count -2) )
                 return;
 
             if (ReferenceEquals(shape, _selectedShape) && _selectedShape is Square)
@@ -84,7 +84,7 @@ namespace Visual.Panels.EditPanelparts
         {
             CreateTitleWithDeleteButton(Texts.PolygonSelected);
             
-            foreach (var point in polygon.Points)
+            foreach (var point in polygon.PointShells)
             {
                 Children.Add(new NodePointLine(point, "Bod "));
             }
@@ -100,7 +100,7 @@ namespace Visual.Panels.EditPanelparts
 
         private void OnAddPointButtonClick(object sender, RoutedEventArgs e)
         {
-            var nodePoint = new NodePoint(_selectedShape, 0, 0);
+            var nodePoint = new PointShell(_selectedShape, 0, 0);
 
             (_selectedShape as Polygon).Add(nodePoint);
         }
@@ -114,6 +114,17 @@ namespace Visual.Panels.EditPanelparts
 
             Children.Add(new SquarePointLine(square));
             Children.Add(new SquareSizeLine(square));
+
+            var button = new PresetButton("Convert to polygon");
+            button.Click += OnConvertToPolygonClick;
+            Children.Add(button);
+
+        }
+
+        private void OnConvertToPolygonClick(object sender, RoutedEventArgs e)
+        {
+            if(_selectedShape is Square square)
+                square.ConvertToPolygon();
         }
 
         private void CreateTitleWithDeleteButton(string text)

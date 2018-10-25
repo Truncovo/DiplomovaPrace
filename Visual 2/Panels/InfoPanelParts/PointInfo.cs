@@ -6,10 +6,10 @@ namespace Visual.Panels.InfoPanelParts
 {
     public class PointInfo : StackPanel
     {
-        public PointInfo(NodePoint point, EdgeParams @params)
+        public PointInfo(PointShell point, EdgeShell edgeShell)
         {
-            Children.Add(new TextBlock { Text = "[ " + point.Point.X + " , " + point.Point.Y + " ]"  + @params});
-            Background = @params.State == ShapeStates.Selected ? BrushesFI.PointSelected : BrushesFI.PointNotSelected;
+            Children.Add(new TextBlock { Text = "[ " + point.Point.X + " , " + point.Point.Y + " ]"  + edgeShell });
+            Background = edgeShell.State == ShapeStates.Selected ? BrushesFI.PointSelected : BrushesFI.PointNotSelected;
         }
     }
 }
