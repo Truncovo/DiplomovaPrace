@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Engine;
+using Engine.XyObjects;
 using NUnit.Framework;
 
 namespace EngineUnitTests.XYObjects
@@ -78,6 +79,23 @@ namespace EngineUnitTests.XYObjects
             var res = source.Equals(second);
 
             Assert.IsTrue(res);
+        }
+
+
+        [TestCase(0, 0, 0, 2, 2)]
+        [TestCase(1, 1, 2, 2, 1.41421d)]
+        [TestCase(0, 0, 0, 0, 0)]
+        [TestCase(5, 5, 5, 5, 0)]
+        [TestCase(1, 2, 4, 4, 3.60555d)]
+
+        public void ELengthOfLine_WhenCalled_CalculateRightDouble(double x1, double y1, double x2, double y2, double expectedResult)
+        {
+            var first = new PointMy(x1, y1);
+            var second =new PointMy(x2, y2);
+
+            var res = PointMy.LengthOfLine(first,second);
+
+            Assert.That(res,Is.EqualTo(expectedResult).Within(0.001d));
         }
     }
 }

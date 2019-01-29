@@ -68,7 +68,7 @@
         public event NoAtributeEventHandler Edited;
         protected virtual void OnEdited()
         {
-            //Edited?.Invoke();
+            Edited?.Invoke();
         }
 
         public override string ToString()

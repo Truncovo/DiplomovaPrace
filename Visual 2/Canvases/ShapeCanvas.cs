@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,9 +12,10 @@ namespace Visual.Canvases
 {
     public class ShapeCanvas : Canvas
     {
+        public static double Scale { get; set; } = 30;
         private readonly IShape _shape;
         private readonly List<Line> _lines = new List<Line>();
-        public ShapeCanvas(IShape shape)
+        public ShapeCanvas(IShape shape, double zoomCoeficient)
         {
             _shape = shape;
             _shape.Edited += OnShapeChanged;
@@ -60,16 +60,16 @@ namespace Visual.Canvases
 
             foreach (var point in _shape.PointShells)
             {
-                p.Points.Add(new Point(point.Point.X, point.Point.Y));
+                p.Points.Add(new Point(point.Point.X*Scale, point.Point.Y*Scale));
             }
             p.MouseDown += OnMouiseDownOnPolyline;
             
             Children.Add(p);
 
             var rValue = new PresetTextBlock("R = " + _shape.Skladba.Value + " " + Texts.RUnit);
-            var topLeftPoint = _shape.MaxLeftMaxTopPoint();
-            Canvas.SetTop(rValue, topLeftPoint.Y);
-            Canvas.SetLeft(rValue, topLeftPoint.X);
+            var topLeftPoint = _shape.FirstPoint();
+            Canvas.SetTop(rValue, topLeftPoint.Y * Scale);
+            Canvas.SetLeft(rValue, topLeftPoint.X * Scale);
 
             Children.Add(rValue);
         }
@@ -77,13 +77,13 @@ namespace Visual.Canvases
         private void DisplayLine(PointShell startPoint, PointShell endPoint, EdgeShell edgeParams)
         {
             var line = new Line();
-            line.X1 = startPoint.Point.X;
-            line.Y1 = startPoint.Point.Y;
-            line.X2 = endPoint.Point.X;
-            line.Y2 = endPoint.Point.Y;
+            line.X1 = startPoint.Point.X * Scale;
+            line.Y1 = startPoint.Point.Y * Scale;
+            line.X2 = endPoint.Point.X * Scale;
+            line.Y2 = endPoint.Point.Y * Scale;
 
             //set style of line
-            line.StrokeThickness = 6;
+            line.StrokeThickness = 5;
 
             if (edgeParams.State == ShapeStates.Basic)
                 line.Stroke = Brushes.Blue;
@@ -113,8 +113,6 @@ namespace Visual.Canvases
                 _shape.State = ShapeStates.Selected;
             else if (_shape.State == ShapeStates.Selected)
                 _shape.State = ShapeStates.Basic;
-
-        
         }
 
         private void OnMouseDownOnLine(object sender, MouseButtonEventArgs e)

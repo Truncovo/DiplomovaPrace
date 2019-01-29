@@ -39,12 +39,10 @@ namespace Engine.Shapes
         }
 
         //PUBLIC METHODS - overrided
-
         public override void Optimize()
         {
             if(_pointsShells.Count < 3)
                 DeleteYourself();
-
 
             var prevPoint = PointShells.FirstOrDefault();
 
@@ -63,11 +61,23 @@ namespace Engine.Shapes
             if (_pointsShells.Count < 3)
                 DeleteYourself();
         }
-        public override PointMy MaxLeftMaxTopPoint()
+
+        public override object Clone(ShapeColection sc = null)
         {
-            //todo not working right
-            return _pointsShells[0].Point;
+            var res = new Polygon(sc);
+            res.Skladba = new Skladba(Skladba.Value);
+            for (int i = 0; i < _pointsShells.Count; i++)
+            {
+                var edgeShell = new EdgeShell(res);
+                edgeShell.EdgeValues.InContact = _edgeShells[i].EdgeValues.InContact;
+                edgeShell.EdgeValues.Psi = _edgeShells[i].EdgeValues.Psi;
+                edgeShell.EdgeValues.PsiEdge = _edgeShells[i].EdgeValues.PsiEdge;
+                edgeShell.EdgeValues.WallThickness= _edgeShells[i].EdgeValues.WallThickness;
+                res.Add(new PointMy(_pointsShells[i].Point.X, _pointsShells[i].Point.Y),edgeShell);
+            }
+            return res;
         }
+
         public override string ToString()
         {
             var stringBuilder = new StringBuilder(40);
@@ -85,11 +95,8 @@ namespace Engine.Shapes
             {
                 stringBuilder.Append(edgeParamse);
                 stringBuilder.Append("\n");
-
             }
-
             return stringBuilder.ToString();
-
         }
     }
 }

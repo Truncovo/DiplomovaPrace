@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Engine.Counts;
+﻿using System.Collections.Generic;
 using Engine.ShapeColections;
 using Engine.Shapes.ShapeParts;
 using Engine.XyObjects;
 
 namespace Engine.Shapes
 {
-    public interface IShape : INode
+    public interface IShape : INode , ICalculatable
     {
         Skladba Skladba { get; set; }
         IShapeColection ShapeColectionParent { get;}
@@ -32,5 +30,7 @@ namespace Engine.Shapes
         void Clear();
         void DeletePoint(PointShell nodePoint);
         void DeleteEdge(EdgeShell nodePoint);
+        PointMy FirstPoint();
+        object Clone(ShapeColection sc = null);
     }
 }

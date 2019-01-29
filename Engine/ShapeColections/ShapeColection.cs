@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Engine.Shapes;
+using Engine.XyObjects;
 
 namespace Engine.ShapeColections
 {
-    public partial class ShapeColection : IShapeColection 
+    public partial class ShapeColection : IShapeColection , ICloneable
     {
         public ShapeColection()
         {
@@ -49,8 +49,6 @@ namespace Engine.ShapeColections
                 {
                 }
             } while (count != _shapes.Count);
-
-
         }
 
         public ColectionValues ColectionValues
@@ -74,26 +72,17 @@ namespace Engine.ShapeColections
 
         public void SplitEdgesForCalculation()
         {
-            var startTime = DateTime.UtcNow;
-            foreach (var shape in _shapes)
-                shape.InvokeEdtited = false;
+            
+            //foreach (var shape in _shapes)
+            //    shape.SetAllEdgesToNotInContact();
 
-            foreach (var shape in _shapes)
-                shape.SetAllEdgesToNotInContact();
-            int counter = 0;
             for (int i = 0; i < _shapes.Count; i++)
             for (int x = i+1; x < _shapes.Count; x++)
-                counter +=_shapes[i].SplitEdges(_shapes[x]);
-
+                _shapes[i].SplitEdges(_shapes[x]);
 
             Optimize();
-
-            foreach (var shape in _shapes)
-                shape.InvokeEdtited = true;
+            
             OnShapeColectionEdited();
-            var Time = DateTime.UtcNow - startTime;
-            Console.WriteLine("edges splitted {0} times time: {1}", counter,Time);
-
         }
 
         public int IndexOf(IShape shape) => _shapes.IndexOf(shape);
@@ -113,7 +102,22 @@ namespace Engine.ShapeColections
             _shapes[index].Edited += OnShapeColectionEdited;
             _shapes[index].State = shapeStates;
             OnShapeColectionChanged();
+        }
 
+        public PointMy MaxXY()
+        {
+            double maxX = 0;
+            double maxY = 0;
+            foreach (var shape in _shapes)
+            {
+                var p = shape.MaxLeftMaxTopPoint();
+                if (p.X > maxX)
+                    maxX = p.X;
+                if (p.Y > maxY)
+                    maxY = p.Y;
+            }
+
+            return new PointMy(maxX, maxY);
         }
 
         //EVENT STUFF
@@ -135,5 +139,18 @@ namespace Engine.ShapeColections
         private readonly List<IShape> _shapes = new List<IShape>();
         private ColectionValues _colectionValues;
 
+        public object Clone()
+        {
+            var res = new ShapeColection();
+            res._colectionValues.LamdaGround = LambdaGround;
+
+            foreach (var shape in _shapes)
+            {
+                shape.Clone(res);
+            }
+
+            Console.WriteLine(res.LambdaGround);
+            return res;
+        }
     }
 }   

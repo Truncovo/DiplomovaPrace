@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using Engine.Shapes;
+using Engine.XyObjects;
 
 namespace Engine.ShapeColections
-
 {
     public delegate void ShapeColectionEventHandler(IShapeColection source);
 
-    public interface IShapeColection : INode
+    public interface IShapeColection : INode, ICalculatable
     {
-        
         ColectionValues ColectionValues { get; set; }
 
         IEnumerable<IShape> GetShapes();
@@ -33,7 +32,7 @@ namespace Engine.ShapeColections
         void MoveShapeTo(IShape shape, int position);
         void MoveShapeUp(IShape shape, int positionChange = 1);
         void MoveShapeDown(IShape shape, int positionChange = 1);
-
+        PointMy MaxXY();
         event ShapeColectionEventHandler ColectionChanged;
     }
 }

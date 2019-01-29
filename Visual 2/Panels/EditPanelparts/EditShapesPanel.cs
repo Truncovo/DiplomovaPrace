@@ -23,14 +23,11 @@ namespace Visual.Panels.EditPanelparts
             ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(300, GridUnitType.Star) });
             ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(200, GridUnitType.Star) });
 
-
             Settings.PlaceInGridAndAdd(new PresetTextBlock(Texts.RValue), this, 0, 0);
             _doubleBox = new DoubleBox();
             Settings.PlaceInGridAndAdd(_doubleBox, this, 0, 1);
 
             Settings.PlaceInGridAndAdd(new PresetTextBlock(Texts.RUnit), this, 0, 2);
-
-
 
             var okButton = new PresetButton("OK");
             okButton.Click += OnOkButtonClicked;

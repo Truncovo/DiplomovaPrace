@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Controls.Primitives;
 using Engine.Counts;
 using Engine.ShapeColections;
 using Engine.Shapes.ShapeParts;
@@ -53,10 +52,12 @@ namespace Engine.Shapes
             foreach (var edgeParam in EdgeShells)
                 edgeParam.EdgeValues.InContact = false;
         }
-       
 
         public virtual void SplitEdgeAsSecondFromResult(int index, List<bool> edgesInContact, List<PointMy> pointsToAdd)
         {
+            if (_edgeShells[index].EdgeValues.InContact)
+                return;
+
             int number = 1;
             foreach (var point in pointsToAdd)
             {
@@ -107,6 +108,12 @@ namespace Engine.Shapes
             _edgeShells.RemoveAt(index);
             OnEdited();
         }
+
+        public PointMy FirstPoint()
+        {
+            return _pointsShells[0].Point;
+        }
+
         public virtual void DeleteYourself()
         {
             ShapeColectionParent.RemoveShape(this);
@@ -115,13 +122,11 @@ namespace Engine.Shapes
         public abstract void Optimize();
         public virtual int SplitEdges(IShape shape)
         {
-
             var edgeAnaliser = new EdgeAnaliser();
             int counter = 0;
             for (int i = 0; i < _pointsShells.Count; i++)
             for (int j = 0; j < shape.EdgesCount(); j++)
             {
-
                 PointMy p1, p2, p3, p4;
                 counter++;
                 //get right points for two edges
@@ -130,7 +135,6 @@ namespace Engine.Shapes
                     p2 = _pointsShells[i + 1].Point;
                 else
                     p2 = _pointsShells[0].Point;
-
 
                 p3 = shape.GetPointShell(j).Point;
                 if (j < shape.EdgesCount() - 1)
@@ -143,11 +147,24 @@ namespace Engine.Shapes
 
                 SplitEdgeAsSecondFromResult(i, result.InContactFirst, result.AddFirst);
                 shape.SplitEdgeAsSecondFromResult(j, result.InContactSecond, result.AddSecond);
-
             }
             return counter;
         }
-        public abstract PointMy MaxLeftMaxTopPoint();
+
+        public virtual PointMy MaxLeftMaxTopPoint()
+        {
+            double maxX = 0;
+            double maxY = 0;
+
+            foreach (var pointsShell in _pointsShells)
+            {
+                if (pointsShell.Point.X > maxX)
+                    maxX = pointsShell.Point.X;
+                if (pointsShell.Point.Y > maxY)
+                    maxY = pointsShell.Point.Y;
+            }
+            return new PointMy(maxX,maxY);
+        }
 
         
         //INode - inheried methods
@@ -195,6 +212,6 @@ namespace Engine.Shapes
             }
         }
 
-        
+        public abstract object Clone(ShapeColection sc = null);
     }
 }

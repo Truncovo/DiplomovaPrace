@@ -1,8 +1,10 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Input;
 using System.Windows.Shapes;
 using Engine.ShapeColections;
+using Engine.Shapes;
 using Visual.Panels.EditPanelparts;
 
 namespace Visual.Panels
@@ -11,56 +13,77 @@ namespace Visual.Panels
     {
         private readonly ShapeColection _shapeColection;
 
-
+        private Grid _grid;
+        private int positionInGrid;
         public EditPanel(ShapeColection shapeColection)
         {
-            BorderBrush = Brushes.BlanchedAlmond;
-            BorderThickness = new Thickness(0,20,20,20);
-
-            var grid = new Grid();
-            Child = grid;
-            int positionInGrid = 0;
+            _grid = new Grid();
+            Child = _grid;
+            positionInGrid = 0;
 
             _shapeColection = shapeColection;
-            _shapeColection.Edited += OnShapeColectionEdited;
 
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
-            Settings.PlaceInGridAndAdd(new EngineSettingsPanel(_shapeColection), grid, positionInGrid++, 0);
+            _grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(60, GridUnitType.Auto) });
+            Settings.PlaceInGridAndAdd(new GrayBorder(
+                new PanelBox(
+                    new EngineSettingsPanel(_shapeColection), 
+                    shapeColection,
+                    () => true,
+                    "Hlavní nastavení"
+                    )), _grid, positionInGrid++, 0);
+
+            _grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40+250, GridUnitType.Auto) });
+            Settings.PlaceInGridAndAdd(new GrayBorder(
+                new PanelBox(
+                    new EditShapePanel(_shapeColection),
+                    shapeColection,
+                    () => (shapeColection.GetShapes(ShapeStates.Selected).Count() == 1), 
+                    "Vlastnosti jedné části",
+                    "Vyberte pouze jeden dvar"
+                )), _grid, positionInGrid++, 0);
+
+            _grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40, GridUnitType.Auto) });
+            Settings.PlaceInGridAndAdd(new GrayBorder(
+                new PanelBox(
+                    new EditShapesPanel(_shapeColection),
+                    shapeColection,
+                    () => (shapeColection.GetShapes(ShapeStates.Selected).Any()),
+                    "Vlastnosti více částí",
+                    "Vyberte alespoň jeden tvar"
+                    )), _grid, positionInGrid++, 0);
 
 
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20) });
-            Settings.PlaceInGridAndAdd(new Rectangle { Fill = Brushes.BlanchedAlmond }, grid, positionInGrid++, 0);
+            _grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(250, GridUnitType.Auto) });
+            Settings.PlaceInGridAndAdd(new GrayBorder(
+                new PanelBox(
+                    new EditEdgesPanel(_shapeColection),
+                    _shapeColection,
+                    () => _shapeColection.GetEdges(ShapeStates.Selected).Any(),
+                    "Vlastnosti více hran",
+                    "Vyberte alespoň jendu hranu"
+                )), _grid, positionInGrid++, 0);
 
-
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
-            Settings.PlaceInGridAndAdd(new GeneralSettingsPanel(_shapeColection), grid, positionInGrid++, 0);
-
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20) });
-            Settings.PlaceInGridAndAdd(new Rectangle { Fill = Brushes.BlanchedAlmond }, grid, positionInGrid++, 0);
-
-            //todo join to one panel
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) });
-            Settings.PlaceInGridAndAdd(new CreatePanel(_shapeColection), grid, positionInGrid++, 0);
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(250) });
-            Settings.PlaceInGridAndAdd(new EditShapePanel(_shapeColection), grid, positionInGrid++, 0);
-
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20) });
-            Settings.PlaceInGridAndAdd(new Rectangle { Fill = Brushes.BlanchedAlmond }, grid, positionInGrid++, 0);
-
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(28) });
-            Settings.PlaceInGridAndAdd(new EditShapesPanel(_shapeColection), grid, positionInGrid++, 0);
-
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20) });
-            Settings.PlaceInGridAndAdd(new Rectangle { Fill = Brushes.BlanchedAlmond }, grid, positionInGrid++, 0);
-
-
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(250) });
-            Settings.PlaceInGridAndAdd(new EditEdgesPanel(_shapeColection), grid, positionInGrid++, 0);
+            _grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(250, GridUnitType.Star) });
+            var rectangle = new Rectangle();
+            rectangle.Fill = GrayBorder.Bg;
+            Settings.PlaceInGridAndAdd(rectangle,_grid, positionInGrid++, 0);
         }
 
-        private void OnShapeColectionEdited()
+        private bool showed = false;
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
+            if(Keyboard.IsKeyDown(Key.P))
+                if (Keyboard.IsKeyDown(Key.R))
+                    if (Keyboard.IsKeyDown(Key.E))
+                        if (!showed)
 
+                        {
+                            _grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(70, GridUnitType.Auto) });
+                            Settings.PlaceInGridAndAdd(new GrayBorder(new PresetPanel(_shapeColection)), _grid, positionInGrid++, 0);
+                            showed = true;
+                        }
+
+            base.OnPreviewKeyDown(e);
         }
     }
 }

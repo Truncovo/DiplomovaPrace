@@ -18,8 +18,6 @@ namespace Visual.Panels.EditPanelparts
         {
             _shapeShapeColection = shpaShapeColection;
             _shapeShapeColection.Edited += OnShapeColectionEdited;
-
-
         }
 
         private void OnShapeColectionEdited()
@@ -27,33 +25,7 @@ namespace Visual.Panels.EditPanelparts
             int count = _shapeShapeColection.CountOfShapes(ShapeStates.Selected);
 
             if(count == 1)
-            { 
                 OneShapeSelected(_shapeShapeColection.GetShapes(ShapeStates.Selected).First());
-                return;
-            }
-
-            NotOneShapesSelected();
-        }
-
-        private void NotOneShapesSelected()
-        {
-            _selectedShape = null;
-            Children.Clear();
-            Children.Add(GetTextBlock("Select"));
-            Children.Add(GetTextBlock("one shape"));
-            Children.Add(GetTextBlock("for shape editing"));
-
-        }
-
-        private TextBlock GetTextBlock(string text)
-        {
-            return new TextBlock
-            {
-                Text = text,
-                FontSize = 25,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
-            };
         }
 
         private void OneShapeSelected(IShape shape)
@@ -75,7 +47,6 @@ namespace Visual.Panels.EditPanelparts
                 case Polygon polygon:
                     OnePolygonSelected(polygon);
                     break;
-            
             }
         }
 
@@ -105,7 +76,6 @@ namespace Visual.Panels.EditPanelparts
             (_selectedShape as Polygon).Add(nodePoint);
         }
 
-
         private void OneSquareSelected(Square square)
         {
             CreateTitleWithDeleteButton(Texts.SquareSelected);
@@ -115,10 +85,9 @@ namespace Visual.Panels.EditPanelparts
             Children.Add(new SquarePointLine(square));
             Children.Add(new SquareSizeLine(square));
 
-            var button = new PresetButton("Convert to polygon");
+            var button = new PresetButton("Převést na mnohoúhelník");
             button.Click += OnConvertToPolygonClick;
             Children.Add(button);
-
         }
 
         private void OnConvertToPolygonClick(object sender, RoutedEventArgs e)
@@ -138,10 +107,9 @@ namespace Visual.Panels.EditPanelparts
             var textBlock = new TextBlock {Text = text};
             textBlock.FontSize = 15;
             Settings.PlaceInGridAndAdd(textBlock, grid,0,0);
-            var deleteButton = new PresetButton("Delete");
+            var deleteButton = new PresetButton("Smazat");
             deleteButton.Click += OnDeleteButtonClick;
             Settings.PlaceInGridAndAdd(deleteButton,grid,0,1);
         }
-
     }
 }

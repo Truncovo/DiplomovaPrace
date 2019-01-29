@@ -10,7 +10,9 @@ namespace Engine.Shapes.ShapeParts
         {
             ShapeParent = parent;
             _state = ShapeStates.Basic;
-            
+            _point = new PointMy(0, 0);
+
+
         }
         public PointShell(IShape parent, int x, int y):this(parent)
         {

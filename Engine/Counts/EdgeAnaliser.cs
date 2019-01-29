@@ -32,7 +32,6 @@ namespace Engine.Counts
                 return _result;
 
             UpdateActualMin();
-          
 
             _onFirstEdge = false;
             _onSecondEdge = false;
@@ -155,7 +154,7 @@ namespace Engine.Counts
             return index <= 1;
         }
 
-    x    private void UpdateActualMin()
+        private void UpdateActualMin()
         {
             if(_actualMin != -1)
                 _pointsUsed[_actualMin] = true;
